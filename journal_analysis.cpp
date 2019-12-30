@@ -53,13 +53,17 @@ void traverse_files(
 
     std::cout << "Number of entries: " << count << std::endl;
 
-    // TODO: Put into vector and sort vector
+    // Sorts most frequent words from unordered map to be displayed
     count = 0;
+    std::map<int, std::string> frequentWords;
     for (const auto& n : *wordcount) {
         count += n.second;
         if (n.second > frequency && isupper(n.first[0])) {
-            std::cout << n.first << " : " << n.second << ", ";
+            frequentWords[n.second] = n.first;
         }
+    }
+    for (auto n = frequentWords.rbegin(); n != frequentWords.rend(); ++n) {
+        std::cout << n->second << " : " << n->first << ", ";
     }
     std::cout << std::endl;
     std::cout << "Total words: " << count << std::endl;
